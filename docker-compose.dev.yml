@@ -1,0 +1,51 @@
+version: '3'
+services:
+  mysql:
+    env_file:
+      - .env
+    build:
+      context: models
+      dockerfile: dockerfile
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_DATABASE}
+    ports:
+      - "3306:3306"
+    command: --init-file /docker-entrypoint-initdb.d/init.sql
+    container_name: a_mysql
+    restart: on-failure:5
+  nodejs:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mysql
+    container_name: a_nodejs
+    restart: on-failure:5
+  nginx:
+    build:
+      context: nginx
+      dockerfile: Dockerfile
+    ports:
+      - 80:80
+    depends_on: 
+      - nodejs
+    container_name: a_nginx
+    restart: on-failure:5
+  redis:
+    image: redis
+    ports:
+      - 6379:6379
+    container_name: a_redis
+    restart: on-failure:5  
+  # admin:
+  #   build:
+  #     context: admin
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - "8888:8888"
+  #   container_name: a_admin
+  #   depends_on:
+  #     - mysql

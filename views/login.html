@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/stylesheets/login.css">
+  <title>NGAS</title>
+</head>
+<body>
+  <section class="main_frame">
+    <div class="login_box">
+      <div id="login_container">
+        <h2>Login</h2>
+        <form>
+          <input type="email" id="email" placeholder="電郵地址" aria-disabled="false" aria-invalid="false" required tabindex="0" autocomplete="username">
+          <input type="password" id="password" placeholder="密碼" aria-disabled="false" aria-invalid="true" required tabindex="0" autocomplete="current-password">
+          <button id="login_btn" type="submit" tabindex="0">登入</button>
+        </form>
+          <h2>Register</h2>
+          <form>
+          <input type="email" id="reg_email" placeholder="電郵地址" autocomplete="username">
+          <input type="password" id="reg_password" placeholder="密碼" autocomplete="new-password">
+          <input type="password" id="con_password" placeholder="確認密碼" autocomplete="new-password">
+          <button id="register_btn" type="submit" tabindex="0">註冊</button>
+        </form>
+        <div id="login_message"></div>
+      </div>
+    </div>
+  </section>
+  <script src="/javascripts/login.js"></script>
+</body>
+</html>

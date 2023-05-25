@@ -1,0 +1,17 @@
+steps:
+  # Step 1: Build the Docker images using Compose
+  - name: 'docker/compose:1.29.2'
+    args: ['build']
+    env:
+      - 'COMPOSE_PROJECT_NAME=ngas'
+      - 'COMPOSE_FILE=docker-compose.yml'
+      - 'DB_PASSWORD=${_DB_PASSWORD}'
+      - 'DB_DATABASE=${_DB_DATABASE}'
+
+  # Step 2: Push the Docker images to Artifact Registry
+  - name: 'docker/compose:1.29.2'
+    args: ['push']
+    env:
+      - 'COMPOSE_PROJECT_NAME=ngas'
+      - 'COMPOSE_FILE=docker-compose.yml'
+  
